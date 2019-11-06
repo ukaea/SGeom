@@ -1,35 +1,39 @@
 
 
-# Adaption of Salome Goem module  into an independent library
+# Adaption of Salome Geometry module  into an independent library
 
-to compile with OpenCASCADE (Open source CAD kernel) without the whole salome, just like `SMesh`, an extraction of Salome mesh module 
+to compile with [OpenCASCADE](https://www.opencascade.com/), an industrial quality open source CAD kernel, without the whole [Salome](https://www.salome-platform.org/) , an open source full-featured CAE platform with GUI and python scripting), just like [`SMesh`](https://github.com/LaughlinResearch/SMESH), an extraction of Salome mesh module.
 
-by Qingfeng Xia, 2019, UKAEA
+adapted by Qingfeng Xia, 2019, [UKAEA]()
 
-License: LGPL as Salome
+License: LGPL as Salome, OpenCASCADE
 
-## Salome Geom module 9.3
+## Salome Geometry module
 
-### Introduction of Geom module
+### Introduction of Geometry module
 
-Salome 9.x has the Shaper module, more dev may go into that new module
+Salome 9.x has the `Shaper` module, more dev may go into that new module
 
-### adapted features
+### adapted features of Salome v9.3
 
 + GEOMAlgo
 
-### tested occt version
+Todo:
 
- it should works with OCCT 7.x, proabably not community edition (OCE)
++ OCC2VTK:  may not quite necessary, as OCCT has such features
++ ShHealOper: what is the difference between OCCT's shape healing algo
++ ShapeRecognition:
+
+### Tested occt version
+
+ It should work with OCCT 7.x, but probably not with the community edition (OCE)
 
 
 
-## process of adaption
+## Process of adaption
 
 ### modification on `CMakeFiles.txt`
-after comment out "GetInPlaceAPI.cxx" in CMakeFiles.txt
-
-this module compiled, without link to GeomUtils. kernel module
+After commenting out "GetInPlaceAPI.cxx" in CMakeFiles.txt, GEOMAlgo compiled, without link to GeomUtils, Kernel module of Salome.
 
 ### OCC version macro 
 replacing OCC version macro header and code in `GEOMAlgo_Gluer.hxx`
@@ -43,7 +47,7 @@ replacing OCC version macro header and code in `GEOMAlgo_Gluer.hxx`
 OCC_VERSION
 ```
 
-
+cmake support
 
 
 

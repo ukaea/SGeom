@@ -1,8 +1,8 @@
 
-#project
+project("SGeom")
 #version salome version 9.3
 
-# this cmake file comes from FreeCAD
+# this cmake file comes from FreeCAD, has provided in this repo
 find_package(OpenCasCade REQUIRED)
 include_directories(
   ${OCC_INCLUDE_DIR}
@@ -12,4 +12,4 @@ include_directories(
 # if other occt detection cmake approaches is used, please define  ${OCC_LIBRARY_DIR} ${OCC_LIBRARIES}
 # for subdirectory cmakefiles.txt
 
-add_subdirectory("GEOMAlgo")
+add_subdirectory("src/GEOMAlgo")
