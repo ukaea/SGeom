@@ -6,7 +6,7 @@ to compile with [OpenCASCADE](https://www.opencascade.com/), an industrial quali
 
 adapted by Qingfeng Xia, 2019, [UKAEA]()
 
-License: LGPL as Salome, OpenCASCADE
+License: LGPL v2.1 as Salome, OpenCASCADE
 
 ## Salome Geometry module
 
@@ -14,15 +14,20 @@ License: LGPL as Salome, OpenCASCADE
 
 Salome 9.x has the `Shaper` module, more dev may go into that new module
 
-### adapted features of Salome v9.3
+### adapted features from Salome v9.3
 
-+ GEOMAlgo
++ GEOMAlgo:  BoundingSphere, BndBoxTree, Gluer, classifier, FinderShapeOn
+
++ ShHealOper: fillHoles
+
+  
+
+  what is the difference between OCCT's shape healing algo in `TKShHealing` toolket
 
 Todo:
 
 + OCC2VTK:  may not quite necessary, as OCCT has such features
-+ ShHealOper: what is the difference between OCCT's shape healing algo
-+ ShapeRecognition:
++ ShapeRecognition: depends on OpenCV, but it does not output TopoDS_Shape
 
 ### Tested occt version
 
@@ -33,10 +38,10 @@ Todo:
 ## Process of adaption
 
 ### modification on `CMakeFiles.txt`
-After commenting out "GetInPlaceAPI.cxx" in CMakeFiles.txt, GEOMAlgo compiled, without link to GeomUtils, Kernel module of Salome.
+After commenting out "GetInPlaceAPI.cxx" in CMakeFiles.txt, GEOMAlgo compiled, without link to `GeomUtils` which is a Kernel module of Salome.
 
 ### OCC version macro 
-replacing OCC version macro header and code in `GEOMAlgo_Gluer.hxx`
+replacing OCC version macro header and code in `GEOMAlgo_Gluer.hxx` with OCCT official header and macro `<Standard_Version.hxx>`
 
 ```cpp
 //#include <Basics_OCCTVersion.hxx>
@@ -44,22 +49,22 @@ replacing OCC version macro header and code in `GEOMAlgo_Gluer.hxx`
 
 #if OCC_VERSION_HEX >= 0x070200
 
-OCC_VERSION
+// use OCC_VERSION_HEX instead of OCC_VERSION
 ```
 
-cmake support
+### Add some extra cmake modules
 
+several cmake modules such as "FindOpenCascade.cmake" added into the `cMake` folder in this repo
 
+`SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/cMake)`
 
 
 ## tool to automatically track salome development
 
-```bash
-#git generate patch after comparison
+It is a feature in the todo list: 
 
-#CI test
-```
++ git generate patch after comparison
+
++ CI test
 
 
-
-### examples for CI
